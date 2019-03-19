@@ -1,5 +1,5 @@
 package language.phones;
 
-abstract class Sound {
-
+public abstract class Sound {
+	protected char ipa;
 }
