@@ -6,5 +6,5 @@ public enum Backness {
 	NEAR_FRONT,
 	CENTRAL,
 	NEAR_BACK,
-	BACK
+	BACK;
 }
