@@ -2,23 +2,26 @@ package language.phones.vowels;
 
 import language.phones.Sound;
 import language.phones.Voice;
+import language.phones.Length;
 
 public class Vowel extends Sound {
-	private boolean round = false ; //assume no if not specified
-	private boolean nasal = false; //assume no if not specified, specify after rounded - ie the height backness bool should specify roundness and not nasality
+	private boolean round; //assume no if not specified
+	private boolean nasal; //assume no if not specified, specify after rounded - ie the height backness bool should specify roundness and not nasality
 	private Height height;
 	private Backness backness;
-	private Voice voice = Voice.VOICED; //optional, assume standard for now when not specified
-	private Tone tone = Tone.NONE; // optional, assume none when not specified
-	private Contour contour = Contour.NONE; //optional, assume none when not specified
-	public Vowel(Height h, Backness b, boolean r, boolean n, Voice v, Tone t, Contour c){
+	private Voice voice; //optional, assume standard for now when not specified
+	private Tone tone; // optional, assume none when not specified
+	private Contour contour; //optional, assume none when not specified
+	private Length length;
+	public Vowel(Height h, Backness b, boolean r, boolean n, Voice v, Tone t, Contour c, Length l){
 		this.setHeight(h);
 		this.setBackness(b);
 		this.setRound(r);
 		this.setNasal(n);
 		this.setVoice(v);
 		this.setTone(t);
-		this.setContour(c);		
+		this.setContour(c);	
+		this.setLength(l);
 	}
 	/**
 	 * @return If the vowel is rounded
@@ -105,6 +108,18 @@ public class Vowel extends Sound {
 	public void setContour(Contour contour) {
 		this.contour = contour;
 	}
+	/**
+	 * @return The length
+	 */
+	public Length getLength() {
+		return length;
+	}
+	/**
+	 * @param contour The length to set
+	 */
+	public void setLength(Length length) {
+		this.length = length;
+	}
 	public class VowelBuilder{
 		private boolean _round = false ; //assume no if not specified
 		private boolean _nasal = false; //assume no if not specified, specify after rounded - ie the height backness bool should specify roundness and not nasality
@@ -113,10 +128,11 @@ public class Vowel extends Sound {
 		private Voice _voice = Voice.VOICED; //optional, assume standard for now when not specified
 		private Tone _tone = Tone.NONE; // optional, assume none when not specified
 		private Contour _contour = Contour.NONE; //optional, assume none when not specified
+		private Length _length = Length.SHORT;
 		public VowelBuilder(){	
 		}
 		public Vowel buildVowel(){
-			return new Vowel(_height, _backness, _round, _nasal, _voice, _tone, _contour);
+			return new Vowel(_height, _backness, _round, _nasal, _voice, _tone, _contour, _length);
 		}
 		public VowelBuilder round(boolean r){
 			this._round=r;
@@ -144,6 +160,10 @@ public class Vowel extends Sound {
 		}
 		public VowelBuilder contour(Contour c){
 			this._contour=c;
+			return this;
+		}
+		public VowelBuilder length(Length l){
+			this._length = l;
 			return this;
 		}
 	}

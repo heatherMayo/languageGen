@@ -1,5 +1,14 @@
 package language.phones;
 
-public abstract class Sound {
-	protected char ipa;
+public class Sound {
+	private char ipa;
+	public Sound(){
+		
+	}
+	public char getIPA(){
+		return ipa;
+	}
+	public void setIPA(char ipa){
+		this.ipa=ipa;
+	}
 }
